@@ -2,4 +2,4 @@
 FROM scratch
 
 # copy local files
-COPY root/ /
+COPY plex-redirect-stdout/root/ /
