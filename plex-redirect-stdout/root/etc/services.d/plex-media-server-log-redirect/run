@@ -3,4 +3,4 @@
 umask 022
 
 exec \
-        s6-setuidgid abc tail -f "/config/Library/Application Support/Plex Media Server/Logs/Plex Media Server.log" > /proc/1/fd/1
+        s6-setuidgid root bash -c 'tail -f  "/config/Library/Application Support/Plex Media Server/Logs/Plex Media Server.log" | grep --line-buffered .  > /proc/1/fd/1'
