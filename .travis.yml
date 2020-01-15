@@ -8,7 +8,7 @@ services:
 env:
   global:
     - DOCKERHUB_LOGGING="nowaidavid/plex-media-server-stdout-logging"
-    - DOCKERHUB_ADDL_MOUNT="nowaidavid/plex-media-server-stdout-logging"
+    - DOCKERHUB_ADDL_MOUNT="nowaidavid/plex-media-addl-rclone-mount"
 
 jobs:
   include:
@@ -22,7 +22,7 @@ jobs:
         # Login to DockerHub
         - echo $DOCKERPASS | docker login -u $DOCKERUSER --password-stdin
         # Push all of the tags
-        - docker push ${DOCKERHUB}:latest
+        - docker push ${DOCKERHUB_LOGGING}:latest
         - docker push ${DOCKERHUB_LOGGING}:${TRAVIS_COMMIT}
     - stage: BuildImageAddlMount
       if: (NOT (type IN (pull_request)))
