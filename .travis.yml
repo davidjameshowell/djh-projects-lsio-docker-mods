@@ -7,7 +7,8 @@ services:
 
 env:
   global:
-    - DOCKERHUB="nowaidavid/plex-media-server-stdout-logging"
+    - DOCKERHUB_LOGGING="nowaidavid/plex-media-server-stdout-logging"
+    - DOCKERHUB_ADDL_MOUNT="nowaidavid/plex-media-server-stdout-logging"
 
 jobs:
   include:
@@ -16,10 +17,22 @@ jobs:
       script:
         # Build image
         - ls -alt
-        - docker build --no-cache -f ./plex-redirect-stdout/Dockerfile -t ${DOCKERHUB}:${TRAVIS_COMMIT} .
-        - docker tag ${DOCKERHUB}:${TRAVIS_COMMIT} ${DOCKERHUB}:latest
+        - docker build --no-cache -f ./plex-redirect-stdout/Dockerfile -t ${DOCKERHUB_LOGGING}:${TRAVIS_COMMIT} .
+        - docker tag ${DOCKERHUB_LOGGING}:${TRAVIS_COMMIT} ${DOCKERHUB_LOGGING}:latest
         # Login to DockerHub
         - echo $DOCKERPASS | docker login -u $DOCKERUSER --password-stdin
         # Push all of the tags
-        - docker push ${DOCKERHUB}:${TRAVIS_COMMIT}
         - docker push ${DOCKERHUB}:latest
+        - docker push ${DOCKERHUB_LOGGING}:${TRAVIS_COMMIT}
+    - stage: BuildImageAddlMount
+      if: (NOT (type IN (pull_request)))
+      script:
+        # Build image
+        - ls -alt
+        - docker build --no-cache -f ./plex-additional-rclone-mount/Dockerfile -t ${DOCKERHUB_ADDL_MOUNT}:${TRAVIS_COMMIT} .
+        - docker tag ${DOCKERHUB_ADDL_MOUNT}:${TRAVIS_COMMIT} ${DOCKERHUB_ADDL_MOUNT}:latest
+        # Login to DockerHub
+        - echo $DOCKERPASS | docker login -u $DOCKERUSER --password-stdin
+        # Push all of the tags
+        - docker push ${DOCKERHUB_ADDL_MOUNT}:${TRAVIS_COMMIT}
+        - docker push ${DOCKERHUB_ADDL_MOUNT}:latest
