@@ -1,5 +1,10 @@
 #!/usr/bin/with-contenv bash
 
-mkdir /${ADDL_RCLONE_MOUNT_NAME}
-chown -R abc:abc /${ADDL_RCLONE_MOUNT_NAME}
+mkdir /scripts
+cd /scripts
+wget -O flatten.py "https://raw.githubusercontent.com/clinton-hall/GetScripts/master/flatten.py"
+wget -O delete_samples.py "https://raw.githubusercontent.com/clinton-hall/GetScripts/master/DeleteSamples.py"
+wget -O hash_renamer.py "https://raw.githubusercontent.com/l3uddz/nzbgetScripts/master/HashRenamer.py"
+wget -O reverse_renamer.py "https://raw.githubusercontent.com/Prinz23/nzbget-pp-reverse/master/reverse_name.py"
 
+chmod +X /scripts/*.py
