@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+
+mkdir /${ADDL_RCLONE_MOUNT_NAME}
+chown -R abc:abc /${ADDL_RCLONE_MOUNT_NAME}
+

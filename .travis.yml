@@ -9,14 +9,14 @@ env:
   global:
     - DOCKERHUB_LOGGING="nowaidavid/plex-media-server-stdout-logging"
     - DOCKERHUB_ADDL_MOUNT="nowaidavid/plex-media-addl-rclone-mount"
+    - DOCKERHUB_NZBGET_POST_PROCESSING="nowaidavid/nzbget-post-processing-scripts"
 
 jobs:
   include:
-    - stage: BuildImage
+    - stage: BuildPlexLoggingImage
       if: (NOT (type IN (pull_request)))
       script:
         # Build image
-        - ls -alt
         - docker build --no-cache -f ./plex-redirect-stdout/Dockerfile -t ${DOCKERHUB_LOGGING}:${TRAVIS_COMMIT} .
         - docker tag ${DOCKERHUB_LOGGING}:${TRAVIS_COMMIT} ${DOCKERHUB_LOGGING}:latest
         # Login to DockerHub
@@ -24,11 +24,10 @@ jobs:
         # Push all of the tags
         - docker push ${DOCKERHUB_LOGGING}:latest
         - docker push ${DOCKERHUB_LOGGING}:${TRAVIS_COMMIT}
-    - stage: BuildImageAddlMount
+    - stage: BuildImagePlexAddlMount
       if: (NOT (type IN (pull_request)))
       script:
         # Build image
-        - ls -alt
         - docker build --no-cache -f ./plex-additional-rclone-mount/Dockerfile -t ${DOCKERHUB_ADDL_MOUNT}:${TRAVIS_COMMIT} .
         - docker tag ${DOCKERHUB_ADDL_MOUNT}:${TRAVIS_COMMIT} ${DOCKERHUB_ADDL_MOUNT}:latest
         # Login to DockerHub
@@ -36,3 +35,14 @@ jobs:
         # Push all of the tags
         - docker push ${DOCKERHUB_ADDL_MOUNT}:${TRAVIS_COMMIT}
         - docker push ${DOCKERHUB_ADDL_MOUNT}:latest
+    - stage: BuildImageNZBGetPostProcessing
+      if: (NOT (type IN (pull_request)))
+      script:
+        # Build image
+        - docker build --no-cache -f ./nzbget-post-processing-scripts/Dockerfile -t ${DOCKERHUB_NZBGET_POST_PROCESSING}:${TRAVIS_COMMIT} .
+        - docker tag ${DOCKERHUB_NZBGET_POST_PROCESSING}:${TRAVIS_COMMIT} ${DOCKERHUB_NZBGET_POST_PROCESSING}:latest
+        # Login to DockerHub
+        - echo $DOCKERPASS | docker login -u $DOCKERUSER --password-stdin
+        # Push all of the tags
+        - docker push ${DOCKERHUB_NZBGET_POST_PROCESSING}:${TRAVIS_COMMIT}
+        - docker push ${DOCKERHUB_NZBGET_POST_PROCESSING}:latest
