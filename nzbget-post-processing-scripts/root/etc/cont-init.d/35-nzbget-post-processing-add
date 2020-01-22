@@ -8,3 +8,4 @@ wget -O hash_renamer.py "https://raw.githubusercontent.com/l3uddz/nzbgetScripts/
 wget -O reverse_renamer.py "https://raw.githubusercontent.com/Prinz23/nzbget-pp-reverse/master/reverse_name.py"
 
 chmod +X /scripts/*.py
+chown -R abc:abc /scripts
