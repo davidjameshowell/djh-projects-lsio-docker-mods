@@ -9,9 +9,6 @@ RUN apt update && apt install git gpgv gnupg -y && curl -sL https://deb.nodesour
 	&& npm install pkg \
 	&& npm install --production \
 	&& npm start \
-	&& mv "/opt/UnicornFFMPEG/bin/Plex Transcoder-linux" "/usr/lib/plexmediaserver/Plex Transcoder" \
-	&& rm "/usr/lib/plexmediaserver/Plex Relay" \
-    && rm -rf /opt/UnicornFFMPEG \
     && git clone https://github.com/UnicornTranscoder/UnicornLoadBalancer.git \
     && cd UnicornLoadBalancer \
     && npm install \

@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+
+# Move compiled binaries and remove Relay.
+mv "/opt/UnicornFFMPEG/bin/Plex Transcoder-linux" "/usr/lib/plexmediaserver/Plex Transcoder"
+rm "/usr/lib/plexmediaserver/Plex Relay" \
