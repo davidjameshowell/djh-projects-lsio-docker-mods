@@ -10,6 +10,7 @@ env:
     - DOCKERHUB_LOGGING="nowaidavid/plex-media-server-stdout-logging"
     - DOCKERHUB_ADDL_MOUNT="nowaidavid/plex-media-addl-rclone-mount"
     - DOCKERHUB_NZBGET_POST_PROCESSING="nowaidavid/nzbget-post-processing-scripts"
+    - DOCKERHUB_PLEX_UNICORN_TRANSCODER="nowaidavid/plex-unicorn-transcoder"
 
 jobs:
   include:
@@ -46,3 +47,15 @@ jobs:
         # Push all of the tags
         - docker push ${DOCKERHUB_NZBGET_POST_PROCESSING}:${TRAVIS_COMMIT}
         - docker push ${DOCKERHUB_NZBGET_POST_PROCESSING}:latest
+    - stage: BuildImagePlexUnicornTranscoder
+      if: (NOT (type IN (pull_request)))
+      script:
+        # Build image
+        - docker build --no-cache -f ./plex-unicorn-transcoder/Dockerfile -t ${DOCKERHUB_PLEX_UNICORN_TRANSCODER}:${TRAVIS_COMMIT} .
+        - docker tag ${DOCKERHUB_PLEX_UNICORN_TRANSCODER}:${TRAVIS_COMMIT} ${DOCKERHUB_PLEX_UNICORN_TRANSCODER}:latest
+        # Login to DockerHub
+        - echo $DOCKERPASS | docker login -u $DOCKERUSER --password-stdin
+        # Push all of the tags
+        - docker push ${DOCKERHUB_PLEX_UNICORN_TRANSCODER}:${TRAVIS_COMMIT}
+        - docker push ${DOCKERHUB_PLEX_UNICORN_TRANSCODER}:latest
+
