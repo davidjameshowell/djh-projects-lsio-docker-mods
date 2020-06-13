@@ -11,6 +11,7 @@ env:
     - DOCKERHUB_ADDL_MOUNT="nowaidavid/plex-media-addl-rclone-mount"
     - DOCKERHUB_NZBGET_POST_PROCESSING="nowaidavid/nzbget-post-processing-scripts"
     - DOCKERHUB_PLEX_UNICORN_TRANSCODER="nowaidavid/plex-unicorn-transcoder"
+    - DOCKERHUB_RCLONE_ROTATE_SERVICE_ACCOUNT="nowaidavid/rclone-rotate-service-account"
 
 jobs:
   include:
@@ -58,4 +59,15 @@ jobs:
         # Push all of the tags
         - docker push ${DOCKERHUB_PLEX_UNICORN_TRANSCODER}:${TRAVIS_COMMIT}
         - docker push ${DOCKERHUB_PLEX_UNICORN_TRANSCODER}:latest
+    - stage: BuildImageRcloneServiceAccounts
+      if: (NOT (type IN (pull_request)))
+      script:
+        # Build image
+        - docker build --no-cache -f ./rclone-rotate-service-account/Dockerfile -t ${DOCKERHUB_RCLONE_ROTATE_SERVICE_ACCOUNT}:${TRAVIS_COMMIT} .
+        - docker tag ${DOCKERHUB_RCLONE_ROTATE_SERVICE_ACCOUNT}:${TRAVIS_COMMIT} ${DOCKERHUB_RCLONE_ROTATE_SERVICE_ACCOUNT}:latest
+        # Login to DockerHub
+        - echo $DOCKERPASS | docker login -u $DOCKERUSER --password-stdin
+        # Push all of the tags
+        - docker push ${DOCKERHUB_RCLONE_ROTATE_SERVICE_ACCOUNT}:${TRAVIS_COMMIT}
+        - docker push ${DOCKERHUB_RCLONE_ROTATE_SERVICE_ACCOUNT}:latest
 

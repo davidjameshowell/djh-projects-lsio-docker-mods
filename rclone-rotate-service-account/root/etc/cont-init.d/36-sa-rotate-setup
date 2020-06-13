@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+
+chown -R abc:abc /etc/services.d/sa-rotate
+chmod +x /etc/services.d/sa-rotate/run
+chmod +x /etc/services.d/sa-rotate/rotate.sh
