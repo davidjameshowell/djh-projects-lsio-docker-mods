@@ -3,4 +3,4 @@
 umask 022
 
 exec \
-        s6-setuidgid abc rclone --config=/rclone/rclone.conf --log-file=/rclone-logs/${ADDL_RCLONE_MOUNT_NAME}.log --log-level INFO --dir-cache-time 1000h --buffer-size 128M --attr-timeout 1000h --dir-cache-time 1000h --poll-interval 15s --rc-addr 127.0.0.1:${ADDL_RCLONE_MOUNT_RC_PORT} ${RCLONE_TD_MOUNT_EXTRA_OPTS} mount ${ADDL_RCLONE_MOUNT_NAME}:${ADDL_RCLONE_MOUNT_PATH} /${ADDL_RCLONE_MOUNT_NAME}
+        s6-setuidgid abc rclone --config=${ADDL_RCLONE_MOUNT_RCLONE_CONFIG} --log-file=/rclone-logs/${ADDL_RCLONE_MOUNT_NAME}.log --log-level INFO --dir-cache-time 1000h --buffer-size 128M --attr-timeout 1000h --dir-cache-time 1000h --poll-interval 15s --rc-addr 127.0.0.1:${ADDL_RCLONE_MOUNT_RC_PORT} ${RCLONE_TD_MOUNT_EXTRA_OPTS} mount ${ADDL_RCLONE_MOUNT_NAME}:${ADDL_RCLONE_MOUNT_PATH} /${ADDL_RCLONE_MOUNT_NAME}
