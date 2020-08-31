@@ -1,0 +1,28 @@
+#!/usr/bin/with-contenv bash
+
+mkdir -p /${MEDIA_RCLONE_MOUNT}
+#Clean out ${MEDIA_RCLONE_MOUNT} folder
+rm -rf /${MEDIA_RCLONE_MOUNT}/*
+
+mkdir -p /rclone
+mkdir -p /rclone-logs
+mkdir -p /service_account_keys/
+mkdir -p /tmp/mc
+
+chown abc:abc /bin/chamber /bin/mc
+
+chamber read -q $RCLONE_CHAMBER_SERVICE $RCLONE_CHAMBER_KEY > /rclone/rclone.conf
+chamber read -q $RCLONE_CHAMBER_SERVICE $MINIO_SECRET_KEY > /tmp/mc/config.json
+
+mc --config-dir=/tmp/mc cp minio/service-account-keys/service_account_keys.zip /tmp
+unzip /tmp/service_account_keys.zip -d /service_account_keys
+
+# permissions
+chown -R abc:abc \
+	/config \
+	/opt \
+	/rclone \
+	/rclone-data \
+	/service_account_keys \
+	/${MEDIA_RCLONE_MOUNT} \
+	/dev/fuse

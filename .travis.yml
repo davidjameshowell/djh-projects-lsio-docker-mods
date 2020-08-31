@@ -12,6 +12,7 @@ env:
     - DOCKERHUB_NZBGET_POST_PROCESSING="nowaidavid/nzbget-post-processing-scripts"
     - DOCKERHUB_PLEX_UNICORN_TRANSCODER="nowaidavid/plex-unicorn-transcoder"
     - DOCKERHUB_RCLONE_ROTATE_SERVICE_ACCOUNT="nowaidavid/rclone-rotate-service-account"
+    - DOCKERHUB_PM_BASE_TOOLS="nowaidavid/pm-base-tools"
 
 jobs:
   include:
@@ -70,4 +71,16 @@ jobs:
         # Push all of the tags
         - docker push ${DOCKERHUB_RCLONE_ROTATE_SERVICE_ACCOUNT}:${TRAVIS_COMMIT}
         - docker push ${DOCKERHUB_RCLONE_ROTATE_SERVICE_ACCOUNT}:latest
+    - stage: BuildImagePMBaseTools
+      if: (NOT (type IN (pull_request)))
+      script:
+        # Build image
+        - docker build --no-cache -f ./pm-base-tools/Dockerfile -t ${DOCKERHUB_PM_BASE_TOOLS}:${TRAVIS_COMMIT} .
+        - docker tag ${DOCKERHUB_PM_BASE_TOOLS}:${TRAVIS_COMMIT} ${DOCKERHUB_PM_BASE_TOOLS}:latest
+        # Login to DockerHub
+        - echo $DOCKERPASS | docker login -u $DOCKERUSER --password-stdin
+        # Push all of the tags
+        - docker push ${DOCKERHUB_PM_BASE_TOOLS}:${TRAVIS_COMMIT}
+        - docker push ${DOCKERHUB_PM_BASE_TOOLS}:latest
+
 

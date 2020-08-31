@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+
+umask 022
+
+exec \
+	s6-setuidgid abc rclone --config=/rclone/rclone.conf --log-file=/rclone-logs/${SERVICE_NAME}.log -v --stats-log-level NOTICE --dir-cache-time 1000h --buffer-size 128M --attr-timeout 1000h --dir-cache-time 1000h --poll-interval 15s --rc --rc-addr 127.0.0.1:5572 --rc-no-auth ${RCLONE_TD_MOUNT_EXTRA_OPTS} mount ${RCLONE_CONFIG_NAME}: /${MEDIA_RCLONE_MOUNT}
