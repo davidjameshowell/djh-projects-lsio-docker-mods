@@ -1,5 +1,15 @@
 #!/usr/bin/with-contenv bash
 
+apt-get update && \
+apt-get install -y \
+ fuse wget vim unzip && \
+echo "**** cleanup ****" && \
+apt-get clean && \
+rm -rf \
+	/tmp/* \
+	/var/lib/apt/lists/* \
+	/var/tmp/*
+
 mkdir -p /${MEDIA_RCLONE_MOUNT}
 #Clean out ${MEDIA_RCLONE_MOUNT} folder
 rm -rf /${MEDIA_RCLONE_MOUNT}/*

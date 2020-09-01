@@ -20,18 +20,4 @@ RUN apk --update add wget unzip && \
   mv /workdir/$RCLONE_BETA_FILENAME/rclone /root-layer/usr/local/bin/rclone
 
 COPY pm-base-tools/root/ /root-layer/
-
-FROM lsiobase/ubuntu:amd64-xenial
-
-RUN \
- apt-get update && \
- apt-get install -y \
-	fuse wget vim unzip && \
- echo "**** cleanup ****" && \
- apt-get clean && \
- rm -rf \
-	/tmp/* \
-	/var/lib/apt/lists/* \
-	/var/tmp/*
-
-COPY --from=buildstage /root-layer/ /
+COPY /root-layer/ /
