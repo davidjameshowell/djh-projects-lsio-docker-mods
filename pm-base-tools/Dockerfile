@@ -9,7 +9,7 @@ ARG MINIO_CLIENT_URL=https://dl.min.io/client/mc/release/linux-amd64/mc
 
 RUN apk --update add wget unzip && \
   mkdir -p /workdir && \
-  mkdir -p /root-layer
+  mkdir -p /root-layer && \
   wget -O /workdir/mc "$MINIO_CLIENT_URL" && \
 	chmod a+x /workdir/mc && \	
   wget -O /workdir/$RCLONE_BETA_FILENAME$RCLONE_BETA_EXT "$RCLONE_BETA_URL" && \
@@ -23,7 +23,6 @@ RUN apk --update add wget unzip && \
   mv /workdir/mc /root-layer/bin/mc
 
 COPY pm-base-tools/root/ /root-layer/
-
 
 FROM lsiobase/ubuntu:amd64-xenial
 
