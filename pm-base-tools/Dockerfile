@@ -20,4 +20,7 @@ RUN apk --update add wget unzip && \
   mv /workdir/$RCLONE_BETA_FILENAME/rclone /root-layer/usr/local/bin/rclone
 
 COPY pm-base-tools/root/ /root-layer/
-COPY /root-layer/ /
+
+FROM lsiobase/ubuntu:amd64-xenial
+
+COPY --from=buildstage /root-layer/ /
