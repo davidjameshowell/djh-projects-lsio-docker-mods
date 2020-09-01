@@ -9,7 +9,7 @@ mkdir -p /rclone-logs
 mkdir -p /service_account_keys/
 mkdir -p /tmp/mc
 
-chown abc:abc /bin/chamber /bin/mc
+chown -R abc:abc /usr/local/bin
 
 chamber read -q $RCLONE_CHAMBER_SERVICE $RCLONE_CHAMBER_KEY > /rclone/rclone.conf
 chamber read -q $RCLONE_CHAMBER_SERVICE $MINIO_SECRET_KEY > /tmp/mc/config.json
@@ -22,7 +22,7 @@ chown -R abc:abc \
 	/config \
 	/opt \
 	/rclone \
-	/rclone-data \
+	/rclone-logs \
 	/service_account_keys \
 	/${MEDIA_RCLONE_MOUNT} \
 	/dev/fuse
