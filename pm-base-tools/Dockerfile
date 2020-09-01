@@ -9,6 +9,7 @@ ARG MINIO_CLIENT_URL=https://dl.min.io/client/mc/release/linux-amd64/mc
 
 RUN apk --update add wget unzip && \
   mkdir -p /workdir && \
+  mkdir -p /root-layer
   wget -O /workdir/mc "$MINIO_CLIENT_URL" && \
 	chmod a+x /workdir/mc && \	
   wget -O /workdir/$RCLONE_BETA_FILENAME$RCLONE_BETA_EXT "$RCLONE_BETA_URL" && \
@@ -16,16 +17,15 @@ RUN apk --update add wget unzip && \
   chmod a+x "/workdir/$RCLONE_BETA_FILENAME/rclone" && \
   cp /workdir/$RCLONE_BETA_FILENAME/rclone /workdir && \
   wget -O /workdir/chamber "https://github.com/segmentio/chamber/releases/download/v${CHAMBER_VERSION}/chamber-v${CHAMBER_VERSION}-linux-amd64" && \
-  chmod +x /workdir/chamber
+  chmod +x /workdir/chamber && \
+  mv /workdir/rclone /root-layer/usr/local/bin/rclone && \
+  mv /workdir/chamber /root-layer//bin/chamber && \
+  mv /workdir/mc /root-layer/bin/mc
 
-# Begin scratch
+COPY pm-base-tools/root/ /root-layer/
+
 
 FROM lsiobase/ubuntu:amd64-xenial
-
-COPY --from=utilities /workdir/rclone /usr/local/bin/rclone
-COPY --from=utilities /workdir/chamber /bin/chamber
-COPY --from=utilities /workdir/mc /bin/mc
-
 
 RUN \
  apt-get update && \
@@ -38,4 +38,4 @@ RUN \
 	/var/lib/apt/lists/* \
 	/var/tmp/*
 
-COPY pm-base-tools/root/ /
+COPY --from=buildstage /root-layer/ /
