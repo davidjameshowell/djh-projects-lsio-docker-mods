@@ -15,7 +15,7 @@ RUN apk --update add wget unzip && \
   unzip /workdir/$RCLONE_BETA_FILENAME$RCLONE_BETA_EXT -d /workdir && \
   chmod a+x "/workdir/$RCLONE_BETA_FILENAME/rclone" && \
   cp /workdir/$RCLONE_BETA_FILENAME/rclone /workdir && \
-  wget -O /workdir/chamber "https://github.com/segmentio/chamber/releases/download/${CHAMBER_VERSION}/chamber-${CHAMBER_VERSION}-linux-amd64" && \
+  wget -O /workdir/chamber "https://github.com/segmentio/chamber/releases/download/v${CHAMBER_VERSION}/chamber-v${CHAMBER_VERSION}-linux-amd64" && \
   chmod +x /workdir/chamber
 
 # Begin scratch
