@@ -20,7 +20,7 @@ RUN apk --update add wget unzip && \
 
 # Begin scratch
 
-FROM scratch
+FROM lsiobase/ubuntu:amd64-xenial
 
 COPY --from=utilities /workdir/rclone /usr/local/bin/rclone
 COPY --from=utilities /workdir/chamber /bin/chamber
