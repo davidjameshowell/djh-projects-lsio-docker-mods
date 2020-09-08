@@ -9,14 +9,14 @@ while :
     do
         echo "Rotating service account to /service_account_keys/${i}"
         # Unsure if we need to use the regular backend set or of it is redundant with RC backend
-        rclone --config=/rclone/rclone.conf backend set ${RCLONE_CONFIG_NAME}: -o service_account_file=/service_account_keys/${i}
-        rclone rc backend/command command=set fs=${RCLONE_CONFIG_NAME}: -o service_account_file=/service_account_keys/${i}
+        rclone --config=/rclone/rclone.conf backend set ${RCLONE_TD_CONFIG}: -o service_account_file=/service_account_keys/${i}
+        rclone rc backend/command command=set fs=${RCLONE_TD_CONFIG}: -o service_account_file=/service_account_keys/${i}
 
         echo "Validating that we rotated properly."
-        rclone --config=/rclone/rclone.conf backend get ${RCLONE_CONFIG_NAME}: -o service_account_file
-        rclone rc backend/command command=get fs=${RCLONE_CONFIG_NAME}: -o service_account_file
+        rclone --config=/rclone/rclone.conf backend get ${RCLONE_TD_CONFIG}: -o service_account_file
+        rclone rc backend/command command=get fs=${RCLONE_TD_CONFIG}: -o service_account_file
         sleep ${SERVICE_ACCOUNT_ROTATE_SLEEP}
     done
 done
 
-rclone rc backend/command command=get fs=${RCLONE_CONFIG_NAME}: -o service_account_file
+rclone rc backend/command command=get fs=${RCLONE_TD_CONFIG}: -o service_account_file
