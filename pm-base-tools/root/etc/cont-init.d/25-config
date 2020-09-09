@@ -38,6 +38,7 @@ chown -R abc:abc \
 	/dev/fuse
 
 echo "Begin chown for non-plex services"
+
 if [ ${SERVICE_NAME} != "plex"]; then;
     chown -R abc:abc \
 	/opt
