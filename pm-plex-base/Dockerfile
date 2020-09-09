@@ -1,6 +1,7 @@
 FROM lsiobase/ubuntu:amd64-xenial
 
-ARG PLEX_AUTOSCAN_BRANCH="4e31fb19d81ca9d7ff0fc2f362f9accfff979bc4"
+ARG PLEX_AUTOSCAN_BRANCH="master"
+ARG PLEX_AUTOSCAN_COMMIT="4e31fb19d81ca9d7ff0fc2f362f9accfff979bc4"
 RUN \
  apt-get update && \
  apt-get install -y \
@@ -11,6 +12,7 @@ RUN \
     g++ \
     unzip && \
  git clone --depth 1 --single-branch --branch ${PLEX_AUTOSCAN_BRANCH} https://github.com/l3uddz/plex_autoscan.git /plex_autoscan && \
+ cd /plex_autoscan && git checkout ${PLEX_AUTOSCAN_COMMIT} && cd - && \
  # Install/update pip and requirements
  pip3 install --no-cache-dir --upgrade pip setuptools wheel && \
  # PIP upgrade bug https://github.com/pypa/pip/issues/5221
