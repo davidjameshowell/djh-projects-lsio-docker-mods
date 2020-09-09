@@ -29,8 +29,7 @@ ln -s /usr/bin/python3 /usr/bin/python && \
  rm -rf \
 	/tmp/* \
 	/var/lib/apt/lists/* \
-	/var/tmp/* && \
-    chmod +x /healthcheck.sh
+	/var/tmp/*
 
 HEALTHCHECK --interval=10s --timeout=8s CMD /healthcheck.sh || exit 1
 ENV \
