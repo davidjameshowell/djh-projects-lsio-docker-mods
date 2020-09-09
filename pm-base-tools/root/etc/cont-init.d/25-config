@@ -27,6 +27,7 @@ chamber read -q $RCLONE_CHAMBER_SERVICE $MINIO_SECRET_KEY > /tmp/mc/config.json
 mc --config-dir=/tmp/mc cp minio/service-account-keys/service_account_keys.zip /tmp
 unzip /tmp/service_account_keys.zip -d /service_account_keys
 
+echo "Begin Chown effect"
 # permissions
 chown -R abc:abc \
 	/config \
@@ -35,7 +36,8 @@ chown -R abc:abc \
 	/service_account_keys \
 	/${MEDIA_RCLONE_MOUNT} \
 	/dev/fuse
-    
+
+echo "Begin chown for non-plex services"
 if [ ${SERVICE_NAME} != "plex"]; then;
     chown -R abc:abc \
 	/opt
