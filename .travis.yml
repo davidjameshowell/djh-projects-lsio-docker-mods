@@ -88,11 +88,11 @@ jobs:
       if: (NOT (type IN (pull_request)))
       script:
         # Build image
-        - docker build --no-cache -f ./pm-plex-base/Dockerfile -t ${DOCKERHUB_PM_PlEX_BASE}:${TRAVIS_COMMIT} .
-        - docker tag ${DOCKERHUB_PM_PlEX_BASE}:${TRAVIS_COMMIT} ${DOCKERHUB_PM_PlEX_BASE}:latest
+        - docker build --no-cache -f ./pm-plex-base/Dockerfile -t ${DOCKERHUB_PM_PLEX_BASE}:${TRAVIS_COMMIT} .
+        - docker tag ${DOCKERHUB_PM_PLEX_BASE}:${TRAVIS_COMMIT} ${DOCKERHUB_PM_PLEX_BASE}:latest
         # Login to DockerHub
         - echo $DOCKERPASS | docker login -u $DOCKERUSER --password-stdin
         # Push all of the tags
-        - docker push ${DOCKERHUB_PM_PlEX_BASE}:${TRAVIS_COMMIT}
-        - docker push ${DOCKERHUB_PM_PlEX_BASE}:latest
+        - docker push ${DOCKERHUB_PM_PLEX_BASE}:${TRAVIS_COMMIT}
+        - docker push ${DOCKERHUB_PM_PLEX_BASE}:latest
 
