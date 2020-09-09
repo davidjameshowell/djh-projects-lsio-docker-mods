@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bash
+
+# Pull latest changes
+echo "# plex_autoscan checking for updates"
+
+if [ $GIT_UPDATE_AUTOSCAN == "true"]
+    git -C /plex_autoscan pull
+fi
+
+# Create and chown plex_autoscan config dir
+mkdir -p /autoscan
+chown -R abc:abc /autoscan /plex_autoscan
