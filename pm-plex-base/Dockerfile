@@ -45,4 +45,4 @@ ENV \
   USE_DOCKER=false \
   USE_SUDO=false
 
-COPY /root/ /
+COPY pm-plex-base/root/ /
