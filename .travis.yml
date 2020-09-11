@@ -5,6 +5,11 @@ language: bash
 services:
   - docker
 
+before_install:
+- docker pull phusion/baseimage:18.04-1.0.0
+- docker pull lsiobase/ubuntu:amd64-xenial
+- docker pull alpine:3.10.2
+
 env:
   global:
     - DOCKERHUB_LOGGING="nowaidavid/plex-media-server-stdout-logging"
@@ -19,7 +24,7 @@ env:
 jobs:
   include:
     - stage: BuildPlexLoggingImage
-      if: (NOT (type IN (pull_request)))
+      if: (NOT (type IN (pull_request)) AND commit_message in ('plex-redirect-stdout'))
       script:
         # Build image
         - docker build --no-cache -f ./plex-redirect-stdout/Dockerfile -t ${DOCKERHUB_LOGGING}:${TRAVIS_COMMIT} .
