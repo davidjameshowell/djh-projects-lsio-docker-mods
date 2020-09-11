@@ -19,7 +19,7 @@ rm -rf \
 	/var/lib/apt/lists/* \
 	/var/tmp/*
 
-echo "[BASE] Creaing RClone folder, cleaning out if anything appears, and making required directories.
+echo "[BASE] Creaing RClone folder, cleaning out if anything appears, and making required directories."
 mkdir -p /${MEDIA_RCLONE_MOUNT}
 #Clean out ${MEDIA_RCLONE_MOUNT} folder
 rm -rf /${MEDIA_RCLONE_MOUNT}/*
