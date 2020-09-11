@@ -8,10 +8,10 @@
 [[ -z "$SERVICE_NAME" ]] && { echo "Parameter SERVICE_NAME is required" ; exit 1; }
 [[ -z "$RCLONE_CONFIG_NAME" ]] && { echo "Parameter RCLONE_CONFIG_NAME is required" ; exit 1; }
 
-echo "[BASE] Installing fuse, wget, vim, unzip."
+echo "[BASE] Installing fuse and vim."
 apt-get update && \
 apt-get install -y \
- fuse wget vim unzip && \
+ fuse vim && \
 echo "**** cleanup ****" && \
 apt-get clean && \
 rm -rf \
@@ -35,9 +35,10 @@ chamber read -q $RCLONE_CHAMBER_SERVICE $RCLONE_CHAMBER_KEY > /rclone/rclone.con
 chamber read -q $RCLONE_CHAMBER_SERVICE $MINIO_SECRET_KEY > /tmp/mc/config.json
 
 mc --config-dir=/tmp/mc cp minio/service-account-keys/service_account_keys.zip /tmp
-unzip /tmp/service_account_keys.zip -d /service_account_keys
+tar -xvf /tmp/service_account_keys.zip -C /service_account_keys
+#unzip /tmp/service_account_keys.zip -d /service_account_keys
 
-echo "Begin Chown effect"
+echo "[BASE] Begin Chown effect"
 # permissions
 chown -R abc:abc \
 	/config \
@@ -47,7 +48,7 @@ chown -R abc:abc \
 	/${MEDIA_RCLONE_MOUNT} \
 	/dev/fuse
 
-echo "Begin chown for non-plex services"
+echo "[BASE] Begin chown for non-plex services"
 
 if [ ${SERVICE_NAME} != "plex"]; then;
     chown -R abc:abc \
