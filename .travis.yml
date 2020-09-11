@@ -1,6 +1,7 @@
 sudo: true
-
-language: bash
+dist: xenial
+os: linux
+language: shell
 
 services:
   - docker
@@ -24,7 +25,7 @@ env:
 jobs:
   include:
     - stage: BuildPlexLoggingImage
-      if: (NOT (type IN (pull_request)) AND commit_message in ('plex-redirect-stdout'))
+      if: ((NOT (type IN (pull_request)) AND (commit_message in ('plex-redirect-stdout'))))
       script:
         # Build image
         - docker build --no-cache -f ./plex-redirect-stdout/Dockerfile -t ${DOCKERHUB_LOGGING}:${TRAVIS_COMMIT} .
@@ -46,7 +47,7 @@ jobs:
         - docker push ${DOCKERHUB_ADDL_MOUNT}:${TRAVIS_COMMIT}
         - docker push ${DOCKERHUB_ADDL_MOUNT}:latest
     - stage: BuildImageNZBGetPostProcessing
-      if: (NOT (type IN (pull_request)) AND commit_message in ('nzbget-post-processing-scripts'))
+      if: ((NOT (type IN (pull_request)) AND (commit_message in ('nzbget-post-processing-scripts'))))
       script:
         # Build image
         - docker build --no-cache -f ./nzbget-post-processing-scripts/Dockerfile -t ${DOCKERHUB_NZBGET_POST_PROCESSING}:${TRAVIS_COMMIT} .
@@ -57,7 +58,7 @@ jobs:
         - docker push ${DOCKERHUB_NZBGET_POST_PROCESSING}:${TRAVIS_COMMIT}
         - docker push ${DOCKERHUB_NZBGET_POST_PROCESSING}:latest
     - stage: BuildImagePlexUnicornTranscoder
-      if: (NOT (type IN (pull_request)) AND commit_message in ('plex-unicorn-transcoder'))
+      if: ((NOT (type IN (pull_request)) AND (commit_message in ('plex-unicorn-transcoder'))))
       script:
         # Build image
         - docker build --no-cache -f ./plex-unicorn-transcoder/Dockerfile -t ${DOCKERHUB_PLEX_UNICORN_TRANSCODER}:${TRAVIS_COMMIT} .
@@ -68,7 +69,7 @@ jobs:
         - docker push ${DOCKERHUB_PLEX_UNICORN_TRANSCODER}:${TRAVIS_COMMIT}
         - docker push ${DOCKERHUB_PLEX_UNICORN_TRANSCODER}:latest
     - stage: BuildImageRcloneServiceAccounts
-      if: (NOT (type IN (pull_request)) AND commit_message in ('rclone-rotate-service-account'))
+      if: ((NOT (type IN (pull_request)) AND (commit_message in ('rclone-rotate-service-account'))))
       script:
         # Build image
         - docker build --no-cache -f ./rclone-rotate-service-account/Dockerfile -t ${DOCKERHUB_RCLONE_ROTATE_SERVICE_ACCOUNT}:${TRAVIS_COMMIT} .
@@ -79,7 +80,7 @@ jobs:
         - docker push ${DOCKERHUB_RCLONE_ROTATE_SERVICE_ACCOUNT}:${TRAVIS_COMMIT}
         - docker push ${DOCKERHUB_RCLONE_ROTATE_SERVICE_ACCOUNT}:latest
     - stage: BuildImagePMBaseTools
-      if: (NOT (type IN (pull_request)) AND commit_message in ('pm-base-tools'))
+      if: ((NOT (type IN (pull_request)) AND (commit_message in ('pm-base-tools'))))
       script:
         # Build image
         - docker build --no-cache -f ./pm-base-tools/Dockerfile -t ${DOCKERHUB_PM_BASE_TOOLS}:${TRAVIS_COMMIT} .
@@ -90,7 +91,7 @@ jobs:
         - docker push ${DOCKERHUB_PM_BASE_TOOLS}:${TRAVIS_COMMIT}
         - docker push ${DOCKERHUB_PM_BASE_TOOLS}:latest
     - stage: BuildImagePMPlexBase
-      if: (NOT (type IN (pull_request)) AND commit_message in ('pm-plex-base'))
+      if: ((NOT (type IN (pull_request)) AND (commit_message in ('pm-plex-base'))))
       script:
         # Build image
         - docker build --no-cache -f ./pm-plex-base/Dockerfile -t ${DOCKERHUB_PM_PLEX_BASE}:${TRAVIS_COMMIT} .
