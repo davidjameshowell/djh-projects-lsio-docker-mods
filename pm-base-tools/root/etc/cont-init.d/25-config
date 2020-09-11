@@ -26,7 +26,6 @@ rm -rf /${MEDIA_RCLONE_MOUNT}/*
 
 mkdir -p /rclone
 mkdir -p /rclone-logs
-mkdir -p /service_account_keys/
 mkdir -p /tmp/mc
 
 chown -R abc:abc /usr/local/bin
