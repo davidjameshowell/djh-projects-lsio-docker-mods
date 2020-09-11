@@ -8,7 +8,6 @@
 [[ -z "$SERVICE_NAME" ]] && { echo "Parameter SERVICE_NAME is required" ; exit 1; }
 [[ -z "$RCLONE_CONFIG_NAME" ]] && { echo "Parameter RCLONE_CONFIG_NAME is required" ; exit 1; }
 
-RCLONE_CONFIG_NAME
 echo "[BASE] Installing fuse, wget, vim, unzip."
 apt-get update && \
 apt-get install -y \

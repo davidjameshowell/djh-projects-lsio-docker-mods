@@ -15,8 +15,7 @@ apt-get install -y \
  pip3 install --no-cache-dir --upgrade -r /plex_autoscan/requirements.txt && \
  # Remove dependencies
  apt-get purge -y --auto-remove \
-   python3-dev \
-   g++ && \
+ 
  echo "**** cleanup PAS Python ****" && \
  apt-get clean && \
  rm -rf \
