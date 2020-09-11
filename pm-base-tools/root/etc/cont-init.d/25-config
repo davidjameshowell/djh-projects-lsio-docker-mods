@@ -34,9 +34,8 @@ chown -R abc:abc /usr/local/bin
 chamber read -q $RCLONE_CHAMBER_SERVICE $RCLONE_CHAMBER_KEY > /rclone/rclone.conf
 chamber read -q $RCLONE_CHAMBER_SERVICE $MINIO_SECRET_KEY > /tmp/mc/config.json
 
-mc --config-dir=/tmp/mc cp minio/service-account-keys/service_account_keys.zip /tmp
+mc --config-dir=/tmp/mc cp minio/service-account-keys/service_account_keys.tar.gz /tmp
 tar -xvf /tmp/service_account_keys.zip -C /service_account_keys
-#unzip /tmp/service_account_keys.zip -d /service_account_keys
 
 echo "[BASE] Begin Chown effect"
 # permissions
