@@ -1,5 +1,15 @@
 #!/usr/bin/with-contenv bash
 
+# Variable check - required for operation!
+[[ -z "$MEDIA_RCLONE_MOUNT" ]] && { echo "Parameter MEDIA_RCLONE_MOUNT is required" ; exit 1; }
+[[ -z "$RCLONE_CHAMBER_SERVICE" ]] && { echo "Parameter RCLONE_CHAMBER_SERVICE is required" ; exit 1; }
+[[ -z "$RCLONE_CHAMBER_KEY" ]] && { echo "Parameter RCLONE_CHAMBER_KEY is required" ; exit 1; }
+[[ -z "$MINIO_SECRET_KEY" ]] && { echo "Parameter MINIO_SECRET_KEY is required" ; exit 1; }
+[[ -z "$SERVICE_NAME" ]] && { echo "Parameter SERVICE_NAME is required" ; exit 1; }
+[[ -z "$RCLONE_CONFIG_NAME" ]] && { echo "Parameter RCLONE_CONFIG_NAME is required" ; exit 1; }
+
+RCLONE_CONFIG_NAME
+echo "[BASE] Installing fuse, wget, vim, unzip."
 apt-get update && \
 apt-get install -y \
  fuse wget vim unzip && \
@@ -10,6 +20,7 @@ rm -rf \
 	/var/lib/apt/lists/* \
 	/var/tmp/*
 
+echo "[BASE] Creaing RClone folder, cleaning out if anything appears, and making required directories.
 mkdir -p /${MEDIA_RCLONE_MOUNT}
 #Clean out ${MEDIA_RCLONE_MOUNT} folder
 rm -rf /${MEDIA_RCLONE_MOUNT}/*
