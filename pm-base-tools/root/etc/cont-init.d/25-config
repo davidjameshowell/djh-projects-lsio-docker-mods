@@ -39,7 +39,6 @@ tar -xvf /tmp/service_account_keys.tar.gz -C /
 echo "[BASE] Begin Chown effect"
 # permissions
 chown -R abc:abc \
-	/config \
 	/rclone \
 	/rclone-logs \
 	/service_account_keys \
@@ -51,5 +50,6 @@ echo "[BASE] Begin chown for non-plex services"
 if [ ${SERVICE_NAME} != "plex" ] 
 then
     chown -R abc:abc \
-	/opt
+	/opt \
+    /config
 fi
