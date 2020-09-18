@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bash
+
+# We use 99 for config level in the event we need to update Plex via natural means, as we will need to replace the binaries.
+
+# Variable check - required for operation!
+[[ -z "$SERVER_PUBLIC" ]] && { echo "Parameter SERVER_PUBLIC is required" ; exit 1; }
+[[ -z "$LB_URL" ]] && { echo "Parameter LB_URL is required" ; exit 1; }
+[[ -z "$VERSION" ]] && { echo "Parameter VERSION is required" ; exit 1; }
+
+echo "[UNICORN FFMPEG] Moving generated binary over to proper directory. Removing relay"
+rm "/usr/lib/plexmediaserver/Plex Relay"
+mv "/tmp/Plex Transcoder" "/usr/lib/plexmediaserver/Plex Transcoder"

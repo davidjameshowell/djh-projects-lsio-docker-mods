@@ -14,6 +14,8 @@ env:
     - DOCKERHUB_RCLONE_ROTATE_SERVICE_ACCOUNT="nowaidavid/rclone-rotate-service-account"
     - DOCKERHUB_PM_BASE_TOOLS="nowaidavid/pm-base-tools"
     - DOCKERHUB_PM_PLEX_BASE="nowaidavid/pm-plex-base"
+    - DOCKERHUB_PM_UNICORN_FFMPEG="nowaidavid/pm-unicorn-ffmpeg"
+
 
 jobs:
   include:
@@ -94,4 +96,14 @@ jobs:
         # Push all of the tags
         - docker push ${DOCKERHUB_PM_PLEX_BASE}:${TRAVIS_COMMIT}
         - docker push ${DOCKERHUB_PM_PLEX_BASE}:latest
-
+    - stage: BuildImagePMUnicornFFMPEG
+      if: (NOT (type IN (pull_request)))
+      script:
+        # Build image
+        - docker build --no-cache -f ./pm-unicorn-ffmpeg/Dockerfile -t ${DOCKERHUB_PM_UNICORN_FFMPEG}:${TRAVIS_COMMIT} .
+        - docker tag ${DOCKERHUB_PM_UNICORN_FFMPEG}:${TRAVIS_COMMIT} ${DOCKERHUB_PM_UNICORN_FFMPEG}:latest
+        # Login to DockerHub
+        - echo $DOCKERPASS | docker login -u $DOCKERUSER --password-stdin
+        # Push all of the tags
+        - docker push ${DOCKERHUB_PM_UNICORN_FFMPEG}:${TRAVIS_COMMIT}
+        - docker push ${DOCKERHUB_PM_UNICORN_FFMPEG}:latest
