@@ -2,7 +2,7 @@ FROM lsiobase/ubuntu:amd64-xenial AS buildstage
 
 RUN apt update && apt install git gpgv gnupg -y && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
 	&& apt install -y nodejs \
-    && /root-layer \
+    && mkdir /root-layer \
 	&& cd /opt \
 	&& git clone https://github.com/UnicornTranscoder/UnicornFFMPEG \
 	&& cd /opt/UnicornFFMPEG \
