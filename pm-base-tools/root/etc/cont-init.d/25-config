@@ -30,7 +30,7 @@ mkdir -p /rclone-logs
 chown -R abc:abc /usr/local/bin
 
 chamber read -q $RCLONE_CHAMBER_SERVICE $RCLONE_CHAMBER_KEY > /rclone/rclone.conf
-chamber read -q $RCLONE_CHAMBER_SERVICE $TOKEN_AUTH_KEY > /tmp/token_auth.json
+chamber read -q $SERVICE_ACCOUNT_ROOT $TOKEN_AUTH_KEY > /tmp/token_auth.json
 
 # Obtain raw token from secrets
 TOKEN_AUTH=$(cat /tmp/token_auth.json | jq --raw-output '.token_auth')
