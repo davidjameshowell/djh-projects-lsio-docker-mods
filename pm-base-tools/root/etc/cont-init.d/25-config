@@ -11,7 +11,7 @@
 echo "[BASE] Installing fuse and vim."
 apt-get update && \
 apt-get install -y \
- fuse vim && \
+ fuse vim jq && \
 echo "**** cleanup ****" && \
 apt-get clean && \
 rm -rf \
@@ -26,15 +26,25 @@ rm -rf /${MEDIA_RCLONE_MOUNT}/*
 
 mkdir -p /rclone
 mkdir -p /rclone-logs
-mkdir -p /tmp/mc
 
 chown -R abc:abc /usr/local/bin
 
 chamber read -q $RCLONE_CHAMBER_SERVICE $RCLONE_CHAMBER_KEY > /rclone/rclone.conf
-chamber read -q $RCLONE_CHAMBER_SERVICE $MINIO_SECRET_KEY > /tmp/mc/config.json
+chamber read -q $RCLONE_CHAMBER_SERVICE $TOKEN_AUTH_KEY > /tmp/token_auth.json
 
-mc --config-dir=/tmp/mc cp minio/service-account-keys/service_account_keys.tar.gz /tmp
-tar -xvf /tmp/service_account_keys.tar.gz -C /
+# Obtain raw token from secrets
+TOKEN_AUTH=$(cat /tmp/token_auth.json | jq --raw-output '.token_auth')
+# Obtain real IP address for IP filtering
+FILTERED_IP=$(curl 'http://www.ipcake.com/api/get/ip')
+# Construct Token Auth
+TOKEN_DOWNLOAD_URL=$(curl "https://${TOKEN_AUTH_HOST}/?key=${TOKEN_AUTH}&filepath=${TOKEN_AUTH_FILEPATH}&cdnurl=${CDN_BASE_URL}&filteredip=${FILTERED_IP}" | jq .url)
+# Download tokenized file
+curl ${ADDL_CURL_OPTS} -o /tmp${TOKEN_AUTH_FILEPATH} ${TOKEN_DOWNLOAD_URL}
+
+tar -xvf /tmp${TOKEN_AUTH_FILEPATH} -C /
+
+rm /tmp${TOKEN_AUTH_FILEPATH}
+rm /tmp/token_auth.json
 
 echo "[BASE] Begin Chown effect"
 # permissions
