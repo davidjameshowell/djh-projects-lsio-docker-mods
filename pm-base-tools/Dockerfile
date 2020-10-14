@@ -1,6 +1,6 @@
 FROM alpine:3.10.2 AS buildstage
 
-ARG RCLONE_VERSION=${RCLONE_VERSION:-1.53.1}
+ARG RCLONE_VERSION=${RCLONE_VERSION:-beta-latest}
 ARG RCLONE_BETA_URL=https://downloads.rclone.org/v${RCLONE_VERSION}/rclone-v${RCLONE_VERSION}-linux-amd64.zip
 ARG RCLONE_BETA_FILENAME=rclone-v${RCLONE_VERSION}-linux-amd64
 ARG RCLONE_BETA_EXT=.zip
