@@ -1,5 +1,20 @@
 #!/usr/bin/with-contenv bash
 
-# Move compiled binaries and remove Relay.
-mv "/opt/UnicornFFMPEG/bin/Plex Transcoder-linux" "/usr/lib/plexmediaserver/Plex Transcoder"
-rm "/usr/lib/plexmediaserver/Plex Relay" \
+#!/usr/bin/with-contenv bash
+
+echo [UNICORN TRANSCODER] Install Node10 and setup UnicornTranscoder
+apt update && apt install git gpgv gnupg -y && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+	&& apt install -y nodejs \
+    && mkdir /root-layer \
+	&& cd /opt \
+	&& git clone https://github.com/UnicornTranscoder/UnicornTranscoder \
+	&& cd /opt/UnicornTranscoder \
+	&& git checkout ${GIT_SHA:-f3df3f70cc4ccff37eb992c53fe5cc26c2d333e8} \
+    && npm install \
+    && npm run install \
+    && apt-get autoremove -y \
+	&& rm -rf /var/lib/apt/lists/*
+    
+# permissions
+chown -R abc:abc \
+	/opt/UnicornTranscoder
