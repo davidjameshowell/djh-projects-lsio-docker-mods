@@ -22,4 +22,5 @@ apt update && apt install git gpgv gnupg -y && curl -sL https://deb.nodesource.c
 
 echo "[UNICORN FFMPEG] Moving generated binary over to proper directory. Removing relay"
 rm "/usr/lib/plexmediaserver/Plex Relay"
+rm "/usr/lib/plexmediaserver/Plex Transcoder"
 mv "/opt/UnicornFFMPEG/bin/Plex Transcoder-linux" "/usr/lib/plexmediaserver/Plex Transcoder"
