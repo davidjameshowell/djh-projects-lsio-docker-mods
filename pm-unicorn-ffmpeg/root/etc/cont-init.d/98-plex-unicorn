@@ -7,6 +7,20 @@
 [[ -z "$LB_URL" ]] && { echo "Parameter LB_URL is required" ; exit 1; }
 [[ -z "$VERSION" ]] && { echo "Parameter VERSION is required" ; exit 1; }
 
+echo [UNICORN FFMPEG] Install Node10 and setup UnicornFFMPEG
+apt update && apt install git gpgv gnupg -y && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+	&& apt install -y nodejs \
+    && mkdir /root-layer \
+	&& cd /opt \
+	&& git clone https://github.com/UnicornTranscoder/UnicornFFMPEG \
+	&& cd /opt/UnicornFFMPEG \
+	&& git checkout ${GIT_SHA:-c58be9cc682776859e0ad7bcf938aaf0ed46f28d} \
+	&& npm install pkg \
+	&& npm install --production \
+	&& npm start
+    && apt-get autoremove -y \
+	&& rm -rf /var/lib/apt/lists/*
+
 echo "[UNICORN FFMPEG] Moving generated binary over to proper directory. Removing relay"
 rm "/usr/lib/plexmediaserver/Plex Relay"
 mv "/tmp/Plex Transcoder" "/usr/lib/plexmediaserver/Plex Transcoder"
