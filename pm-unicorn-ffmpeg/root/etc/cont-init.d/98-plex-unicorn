@@ -5,7 +5,6 @@
 # Variable check - required for operation!
 [[ -z "$SERVER_PUBLIC" ]] && { echo "Parameter SERVER_PUBLIC is required" ; exit 1; }
 [[ -z "$LB_URL" ]] && { echo "Parameter LB_URL is required" ; exit 1; }
-[[ -z "$VERSION" ]] && { echo "Parameter VERSION is required" ; exit 1; }
 
 echo [UNICORN FFMPEG] Install Node10 and setup UnicornFFMPEG
 apt update && apt install git gpgv gnupg -y && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
