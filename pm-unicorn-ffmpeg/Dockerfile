@@ -1,3 +1,3 @@
-FROM alpine:3.12.0
+FROM scratch
 
 COPY pm-unicorn-ffmpeg/root/ /
