@@ -16,7 +16,7 @@ apt update && apt install git gpgv gnupg -y && curl -sL https://deb.nodesource.c
 	&& git checkout ${GIT_SHA:-c58be9cc682776859e0ad7bcf938aaf0ed46f28d} \
 	&& npm install pkg \
 	&& npm install --production \
-	&& npm start
+	&& npm start \
     && apt-get autoremove -y \
 	&& rm -rf /var/lib/apt/lists/*
 
