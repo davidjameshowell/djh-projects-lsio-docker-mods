@@ -5,11 +5,11 @@
 echo [UNICORN TRANSCODER] Install Node10 and setup UnicornTranscoder
 apt update && apt install git gpgv gnupg -y && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
 	&& apt install -y nodejs \
-    && mkdir /root-layer \
 	&& cd /opt \
 	&& git clone https://github.com/UnicornTranscoder/UnicornTranscoder \
 	&& cd /opt/UnicornTranscoder \
 	&& git checkout ${GIT_SHA:-f3df3f70cc4ccff37eb992c53fe5cc26c2d333e8} \
+    && chown -R abc:abc /root/.npm \
     && npm install \
     && npm run install \
     && apt-get autoremove -y \
