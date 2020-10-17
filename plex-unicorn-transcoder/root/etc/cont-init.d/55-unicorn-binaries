@@ -9,7 +9,7 @@ apt update && apt install git gpgv gnupg -y && curl -sL https://deb.nodesource.c
 	&& git clone https://github.com/UnicornTranscoder/UnicornTranscoder \
 	&& cd /opt/UnicornTranscoder \
 	&& git checkout ${GIT_SHA:-f3df3f70cc4ccff37eb992c53fe5cc26c2d333e8} \
-    && chown -R abc:abc /root/.npm \
+    && mkdir -p /root/.npm \
     && npm install \
     && npm run install \
     && apt-get autoremove -y \
@@ -17,4 +17,4 @@ apt update && apt install git gpgv gnupg -y && curl -sL https://deb.nodesource.c
     
 # permissions
 chown -R abc:abc \
-	/opt/UnicornTranscoder
+	/opt/UnicornTranscoder /root/.npm
