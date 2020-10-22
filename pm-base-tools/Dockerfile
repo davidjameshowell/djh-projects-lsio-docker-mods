@@ -8,6 +8,7 @@ ARG CHAMBER_VERSION=${CHAMBER_VERSION:-2.9.0}
 
 RUN apk --update add wget unzip && \
   mkdir -p /workdir/ && \
+  mkdir -p /workdir/usr/local/bin/ && \
   mkdir -p /root-layer/ && \
   wget -O /workdir/$RCLONE_BETA_FILENAME$RCLONE_BETA_EXT "$RCLONE_BETA_URL" && \
   unzip /workdir/$RCLONE_BETA_FILENAME$RCLONE_BETA_EXT -d /workdir && \
