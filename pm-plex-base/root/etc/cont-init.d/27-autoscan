@@ -23,9 +23,6 @@ apt-get install -y \
 	/var/lib/apt/lists/* \
 	/var/tmp/*
 
-# Pull latest changes
-
-
 if [ $GIT_UPDATE_AUTOSCAN == 'true']
     echo "[PAS] plex_autoscan checking for updates via Git"
     git -C /plex_autoscan pull

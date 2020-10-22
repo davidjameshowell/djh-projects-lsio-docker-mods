@@ -4,9 +4,12 @@
 [[ -z "$MEDIA_RCLONE_MOUNT" ]] && { echo "Parameter MEDIA_RCLONE_MOUNT is required" ; exit 1; }
 [[ -z "$RCLONE_CHAMBER_SERVICE" ]] && { echo "Parameter RCLONE_CHAMBER_SERVICE is required" ; exit 1; }
 [[ -z "$RCLONE_CHAMBER_KEY" ]] && { echo "Parameter RCLONE_CHAMBER_KEY is required" ; exit 1; }
-[[ -z "$MINIO_SECRET_KEY" ]] && { echo "Parameter MINIO_SECRET_KEY is required" ; exit 1; }
 [[ -z "$SERVICE_NAME" ]] && { echo "Parameter SERVICE_NAME is required" ; exit 1; }
-[[ -z "$RCLONE_CONFIG_NAME" ]] && { echo "Parameter RCLONE_CONFIG_NAME is required" ; exit 1; }
+[[ -z "$RCLONE_CONFIG_NAME" ]] && { echo "Parameter RCLONE_CONFIG_NAME is required" ; exit 1; }\
+
+# Default coded
+RCLONE_LOGS_DIR=${RCLONE_LOGS_DIR:-/rclone-logs/}
+RCLONE_CONFIG_FILE=${RCLONE_CONFIG_FILE:-/rclone/rclone.conf}
 
 echo "[BASE] Installing fuse and vim."
 apt-get update && \
@@ -25,7 +28,7 @@ mkdir -p /${MEDIA_RCLONE_MOUNT}
 rm -rf /${MEDIA_RCLONE_MOUNT}/*
 
 mkdir -p /rclone
-mkdir -p /rclone-logs
+mkdir -p ${RCLONE_LOGS_DIR}
 
 chown -R abc:abc /usr/local/bin
 

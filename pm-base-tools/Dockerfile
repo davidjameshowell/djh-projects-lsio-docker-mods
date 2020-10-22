@@ -1,17 +1,13 @@
 FROM alpine:3.10.2 AS buildstage
 
-ARG RCLONE_VERSION=${RCLONE_VERSION:-1.54.0-beta.4825.5b09599a2}
+ARG RCLONE_VERSION=${RCLONE_VERSION:-1.54.0-beta.4831.4e2b5389d}
 ARG RCLONE_BETA_URL=https://beta.rclone.org/v${RCLONE_VERSION}/rclone-v${RCLONE_VERSION}-linux-amd64.zip
 ARG RCLONE_BETA_FILENAME=rclone-v${RCLONE_VERSION}-linux-amd64
 ARG RCLONE_BETA_EXT=.zip
-ARG CHAMBER_VERSION=${CHAMBER_VERSION:-2.8.2}
-ARG MINIO_CLIENT_URL=https://dl.min.io/client/mc/release/linux-amd64/mc
+ARG CHAMBER_VERSION=${CHAMBER_VERSION:-2.9.0}
 
 RUN apk --update add wget unzip && \
   mkdir -p /workdir/ && \
-  mkdir -p /root-layer/usr/local/bin/ && \
-  wget -O /root-layer/usr/local/bin/mc "$MINIO_CLIENT_URL" && \
-  chmod a+x /root-layer/usr/local/bin/mc && \
   wget -O /workdir/$RCLONE_BETA_FILENAME$RCLONE_BETA_EXT "$RCLONE_BETA_URL" && \
   unzip /workdir/$RCLONE_BETA_FILENAME$RCLONE_BETA_EXT -d /workdir && \
   chmod a+x "/workdir/$RCLONE_BETA_FILENAME/rclone" && \
