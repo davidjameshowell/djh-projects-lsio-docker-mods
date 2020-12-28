@@ -1,5 +1,10 @@
 #!/usr/bin/with-contenv bash
 
+# If the first run completed successfully, we are done
+if [ -e /.firstPMBaseRunComplete ]; then
+  exit 0
+fi
+
 # Variable check - required for operation!
 [[ -z "$MEDIA_RCLONE_MOUNT" ]] && { echo "Parameter MEDIA_RCLONE_MOUNT is required" ; exit 1; }
 [[ -z "$RCLONE_CHAMBER_SERVICE" ]] && { echo "Parameter RCLONE_CHAMBER_SERVICE is required" ; exit 1; }
@@ -66,3 +71,6 @@ then
 	/opt \
     /config
 fi
+
+# Touch first run file to ensure that we are not redoing already created tasks.
+touch /.firstPMBaseRunComplete

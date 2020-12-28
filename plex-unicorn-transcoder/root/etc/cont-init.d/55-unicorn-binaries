@@ -1,6 +1,9 @@
 #!/usr/bin/with-contenv bash
 
-#!/usr/bin/with-contenv bash
+# If the first run completed successfully, we are done
+if [ -e /.firstUnicornTransRunComplete ]; then
+  exit 0
+fi
 
 echo [UNICORN TRANSCODER] Install Node10 and setup UnicornTranscoder
 apt update && apt install git gpgv gnupg -y && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
@@ -18,3 +21,5 @@ apt update && apt install git gpgv gnupg -y && curl -sL https://deb.nodesource.c
 # permissions
 chown -R abc:abc \
 	/opt/UnicornTranscoder /root/.npm
+
+touch ./firstUnicornTransRunComplete

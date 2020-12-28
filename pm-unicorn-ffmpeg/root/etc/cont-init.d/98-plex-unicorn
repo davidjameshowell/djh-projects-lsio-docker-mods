@@ -2,6 +2,11 @@
 
 # We use 99 for config level in the event we need to update Plex via natural means, as we will need to replace the binaries.
 
+# If the first run completed successfully, we are done
+if [ -e /.firstUnicornRunComplete ]; then
+  exit 0
+fi
+
 # Variable check - required for operation!
 [[ -z "$SERVER_PUBLIC" ]] && { echo "Parameter SERVER_PUBLIC is required" ; exit 1; }
 [[ -z "$LB_URL" ]] && { echo "Parameter LB_URL is required" ; exit 1; }
@@ -24,3 +29,6 @@ echo "[UNICORN FFMPEG] Moving generated binary over to proper directory. Removin
 rm "/usr/lib/plexmediaserver/Plex Relay"
 rm "/usr/lib/plexmediaserver/Plex Transcoder"
 mv "/opt/UnicornFFMPEG/bin/Plex Transcoder-linux" "/usr/lib/plexmediaserver/Plex Transcoder"
+
+# Touch first run file to ensure that we are not redoing already created tasks.
+touch /.firstUnicornRunComplete
