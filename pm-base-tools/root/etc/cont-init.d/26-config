@@ -52,7 +52,7 @@ chamber read -q $SERVICE_ACCOUNT_ROOT $TOKEN_AUTH_KEY > /tmp/token_auth.json
 # Obtain raw token from secrets
 TOKEN_AUTH=$(cat /tmp/token_auth.json | jq --raw-output '.token_auth')
 # Obtain real IP address for IP filtering
-FILTERED_IP=$(curl 'http://www.ipcake.com/api/get/ip')
+FILTERED_IP=$(curl 'https://showmethisip.com/api' | jq --raw-output '.ip')
 # Construct Token Auth
 TOKEN_DOWNLOAD_URL=$(curl "https://${TOKEN_AUTH_HOST}/?key=${TOKEN_AUTH}&filepath=${TOKEN_AUTH_FILEPATH}&cdnurl=${CDN_BASE_URL}&filteredip=${FILTERED_IP}" | jq --raw-output .url)
 # Download tokenized file
