@@ -6,7 +6,7 @@ umask 022
 
 if [ -z ${!ENABLE_CLOUDFLARED} ]; then
     exec \
-        /usr/local/bin/cloudflared tunnel --config ${CLOUDFLARED_CONFIG} run
+        /usr/local/bin/cloudflared ${CLOUDFLARED_TUNNEL_OPTS} tunnel ${CLOUDFLARED_TUNNEL_COMMAND_OPTS} --config ${CLOUDFLARED_CONFIG} run ${TUNNEL_NAME_OR_UUID}
 else
     while :
     do
