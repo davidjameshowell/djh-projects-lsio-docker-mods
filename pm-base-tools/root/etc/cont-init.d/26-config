@@ -43,8 +43,10 @@ rm -rf /${MEDIA_RCLONE_MOUNT}/*
 
 mkdir -p /rclone
 mkdir -p ${RCLONE_LOGS_DIR}
+mkdir -p /cloudflared-configs
 
 chown -R abc:abc /usr/local/bin
+chown -R abc:abc /cloudflared-configs
 
 chamber read -q $RCLONE_CHAMBER_SERVICE $RCLONE_CHAMBER_KEY > /rclone/rclone.conf
 chamber read -q $SERVICE_ACCOUNT_ROOT $TOKEN_AUTH_KEY > /tmp/token_auth.json

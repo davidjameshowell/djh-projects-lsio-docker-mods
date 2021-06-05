@@ -1,0 +1,16 @@
+#!/usr/bin/with-contenv bash
+
+# Setup Cloudflared tunnel
+
+umask 022
+
+if [ -z ${!ENABLE_CLOUDFLARED} ]; then
+    exec \
+        /usr/local/bin/cloudflared tunnel --config ${CLOUDFLARED_CONFIG} run
+else
+    while :
+    do
+        echo "Running script to keep service alive; Cloudflared is not running"
+        sleep 1
+    done
+fi
