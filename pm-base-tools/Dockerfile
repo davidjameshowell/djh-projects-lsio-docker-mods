@@ -16,7 +16,7 @@ RUN apk --update add wget unzip && \
   chmod +x /root-layer/usr/local/bin/chamber && \
   wget -O /tmp/cloudflared-stable-linux-amd64.tgz "https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.tgz" && \
   tar -xvf /tmp/cloudflared-stable-linux-amd64.tgz && \
-  mv /tmp/cloudflared-stable-linux-amd64 /root-layer/usr/local/bin/cloudflared && \
+  mv /tmp/cloudflared /root-layer/usr/local/bin/cloudflared && \
   chmod +x /root-layer/usr/local/bin/cloudflared && \
   mv /workdir/$RCLONE_BETA_FILENAME/rclone /root-layer/usr/local/bin/rclone
 
