@@ -14,9 +14,7 @@ RUN apk --update add wget unzip && \
   chmod a+x "/workdir/$RCLONE_BETA_FILENAME/rclone" && \
   wget -O /root-layer/usr/local/bin/chamber "https://github.com/segmentio/chamber/releases/download/v${CHAMBER_VERSION}/chamber-v${CHAMBER_VERSION}-linux-amd64" && \
   chmod +x /root-layer/usr/local/bin/chamber && \
-  wget -O /tmp/cloudflared-stable-linux-amd64.tgz "https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.tgz" && \
-  tar -xvf /tmp/cloudflared-stable-linux-amd64.tgz && \
-  mv /tmp/cloudflared /root-layer/usr/local/bin/cloudflared && \
+  wget -O /root-layer/usr/local/bin/cloudflared "https://github.com/cloudflare/cloudflared/releases/download/2021.5.10/cloudflared-linux-amd64" && \
   chmod +x /root-layer/usr/local/bin/cloudflared && \
   mv /workdir/$RCLONE_BETA_FILENAME/rclone /root-layer/usr/local/bin/rclone
 
