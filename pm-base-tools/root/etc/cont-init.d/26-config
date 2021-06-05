@@ -16,7 +16,9 @@ fi
 RCLONE_LOGS_DIR=${RCLONE_LOGS_DIR:-/rclone-logs/}
 RCLONE_CONFIG_FILE=${RCLONE_CONFIG_FILE:-/rclone/rclone.conf}
 
+mkdir -p /cloudflared-configs
 cp -R /tmp/*.yml /cloudflared-configs/
+chown -R abc:abc /cloudflared-configs
 
 # Check if we're using Ubuntu or Alpine, then do appropriate
 if ! command -v apk &> /dev/null
@@ -45,10 +47,8 @@ rm -rf /${MEDIA_RCLONE_MOUNT}/*
 
 mkdir -p /rclone
 mkdir -p ${RCLONE_LOGS_DIR}
-mkdir -p /cloudflared-configs
 
 chown -R abc:abc /usr/local/bin
-chown -R abc:abc /cloudflared-configs
 
 chamber read -q $RCLONE_CHAMBER_SERVICE $RCLONE_CHAMBER_KEY > /rclone/rclone.conf
 chamber read -q $SERVICE_ACCOUNT_ROOT $TOKEN_AUTH_KEY > /tmp/token_auth.json
