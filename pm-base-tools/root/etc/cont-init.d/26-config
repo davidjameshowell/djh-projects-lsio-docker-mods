@@ -45,6 +45,8 @@ mkdir -p /rclone
 mkdir -p ${RCLONE_LOGS_DIR}
 mkdir -p /cloudflared-configs
 
+cp -R /tmp/*.yml /cloudflared-configs/
+
 chown -R abc:abc /usr/local/bin
 chown -R abc:abc /cloudflared-configs
 
