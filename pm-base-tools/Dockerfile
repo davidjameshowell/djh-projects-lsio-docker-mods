@@ -1,11 +1,11 @@
 FROM alpine:3.13.6 AS buildstage
 
-ARG RCLONE_VERSION=${RCLONE_VERSION:-v2.10.3}
+ARG RCLONE_VERSION=${RCLONE_VERSION:-v1.56.1}
 #ARG RCLONE_BETA_URL=https://beta.rclone.org/v${RCLONE_VERSION}/rclone-v${RCLONE_VERSION}-linux-amd64.zip
 ARG RCLONE_URL=https://downloads.rclone.org/${RCLONE_VERSION}/rclone-${RCLONE_VERSION}-linux-amd64.zip
 ARG RCLONE_FILENAME=rclone-v${RCLONE_VERSION}-linux-amd64
 ARG RCLONE_EXT=.zip
-ARG CHAMBER_VERSION=${CHAMBER_VERSION:-2.9.1}
+ARG CHAMBER_VERSION=${CHAMBER_VERSION:-2.10.3}
 
 RUN apk --update add wget unzip && \
   mkdir -p /workdir/ && \
