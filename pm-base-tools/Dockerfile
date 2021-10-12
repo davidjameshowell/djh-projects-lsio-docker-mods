@@ -1,6 +1,6 @@
 FROM alpine:3.13.6 AS buildstage
 
-ARG RCLONE_VERSION=${RCLONE_VERSION:-v1.56.1}
+ARG RCLONE_VERSION=${RCLONE_VERSION:-v1.56.2}
 #ARG RCLONE_BETA_URL=https://beta.rclone.org/v${RCLONE_VERSION}/rclone-v${RCLONE_VERSION}-linux-amd64.zip
 ARG RCLONE_URL=https://downloads.rclone.org/${RCLONE_VERSION}/rclone-${RCLONE_VERSION}-linux-amd64.zip
 ARG RCLONE_FILENAME=rclone-${RCLONE_VERSION}-linux-amd64
@@ -15,7 +15,7 @@ RUN apk --update add wget unzip && \
   chmod a+x "/workdir/$RCLONE_FILENAME/rclone" && \
   wget -O /root-layer/usr/local/bin/chamber "https://github.com/segmentio/chamber/releases/download/v${CHAMBER_VERSION}/chamber-v${CHAMBER_VERSION}-linux-amd64" && \
   chmod +x /root-layer/usr/local/bin/chamber && \
-  wget -O /root-layer/usr/local/bin/cloudflared "https://github.com/cloudflare/cloudflared/releases/download/2021.9.1/cloudflared-linux-amd64" && \
+  wget -O /root-layer/usr/local/bin/cloudflared "https://github.com/cloudflare/cloudflared/releases/download/2021.9.2/cloudflared-linux-amd64" && \
   chmod +x /root-layer/usr/local/bin/cloudflared && \
   mv /workdir/$RCLONE_FILENAME/rclone /root-layer/usr/local/bin/rclone
 
