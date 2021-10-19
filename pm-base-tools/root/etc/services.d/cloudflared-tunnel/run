@@ -11,6 +11,6 @@ else
     while :
     do
         echo "Running script to keep service alive; Cloudflared is not running"
-        sleep 1
+        sleep 86400
     done
 fi
