@@ -5,7 +5,8 @@ ARG RCLONE_VERSION=${RCLONE_VERSION:-v1.56.2}
 ARG RCLONE_URL=https://downloads.rclone.org/${RCLONE_VERSION}/rclone-${RCLONE_VERSION}-linux-amd64.zip
 ARG RCLONE_FILENAME=rclone-${RCLONE_VERSION}-linux-amd64
 ARG RCLONE_EXT=.zip
-ARG CHAMBER_VERSION=${CHAMBER_VERSION:-2.10.3}
+ARG CHAMBER_VERSION=${CHAMBER_VERSION:-2.10.6}
+ARG CLOUDFLARED_VERSION=${CLOUDFLARED_VERSION:-2021.10.3}
 
 RUN apk --update add wget unzip && \
   mkdir -p /workdir/ && \
@@ -15,7 +16,7 @@ RUN apk --update add wget unzip && \
   chmod a+x "/workdir/$RCLONE_FILENAME/rclone" && \
   wget -O /root-layer/usr/local/bin/chamber "https://github.com/segmentio/chamber/releases/download/v${CHAMBER_VERSION}/chamber-v${CHAMBER_VERSION}-linux-amd64" && \
   chmod +x /root-layer/usr/local/bin/chamber && \
-  wget -O /root-layer/usr/local/bin/cloudflared "https://github.com/cloudflare/cloudflared/releases/download/2021.9.2/cloudflared-linux-amd64" && \
+  wget -O /root-layer/usr/local/bin/cloudflared "https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED_VERSION}/cloudflared-linux-amd64" && \
   chmod +x /root-layer/usr/local/bin/cloudflared && \
   mv /workdir/$RCLONE_FILENAME/rclone /root-layer/usr/local/bin/rclone
 
