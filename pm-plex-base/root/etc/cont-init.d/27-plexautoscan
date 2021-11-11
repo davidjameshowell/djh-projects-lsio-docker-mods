@@ -29,7 +29,7 @@ if [ ${ENABLE_LEGACY_PAS} == "true" ]; then
     /var/lib/apt/lists/* \
     /var/tmp/*
 
-  if [ $GIT_UPDATE_AUTOSCAN == 'true']
+  if [ $GIT_UPDATE_AUTOSCAN == 'true']; then
       echo "[PAS] plex_autoscan checking for updates via Git"
       git -C /plex_autoscan pull
   fi
