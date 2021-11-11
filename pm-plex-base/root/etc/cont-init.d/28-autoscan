@@ -7,8 +7,12 @@ fi
 
 if [ ${ENABLE_AUTOSCAN} == "true" ]; then
   rm -rf /autoscan/autoscan
-  # Configure Autoscan
-  curl -o /autoscan/autoscan "https://github.com/Cloudbox/autoscan/releases/download/${AUTOSCAN_VERSION:-v.1.2.0}/autoscan_${AUTOSCAN_VERSION:-v.1.2.0}_linux_amd64"
+  # Configure Autoscan with latest release
+  curl -s https://api.github.com/repos/Cloudbox/autoscan/releases/latest \
+  | grep "browser_download_url.*linux_amd64" \
+  | cut -d : -f 2,3 \
+  | tr -d \" \
+  | wget -O /autoscan/autoscan -qi -  
   # Configure A-Train
   rm -rf /autoscan/a-train
   chamber read -q $SERVICE_ACCOUNT_ROOT $TOKEN_AUTH_KEY > /tmp/token_auth.json
