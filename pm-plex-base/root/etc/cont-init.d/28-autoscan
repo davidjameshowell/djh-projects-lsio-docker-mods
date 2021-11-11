@@ -26,7 +26,7 @@ if [ ${ENABLE_AUTOSCAN} == "true" ]; then
   curl ${ADDL_CURL_OPTS} -o /autoscan/a-train ${TOKEN_DOWNLOAD_URL}
   chmod +x /autoscan/a-train
   chmod +x /autoscan/autoscan
-  chown -R abc:abc /autoscan/autoscan /autoscan/a-train
+  chown -R abc:abc /autoscan
   rm /tmp/token_auth.json
 else
   echo "Not configuring Legacy PAS, skipping..."
