@@ -1,0 +1,29 @@
+#!/usr/bin/with-contenv bash
+
+# If the first run completed successfully, we are done
+if [ -e /.plexAutoscanConfigure ]; then
+  exit 0
+fi
+
+if [ ${ENABLE_AUTOSCAN} == "true" ]; then
+  rm -rf /autoscan/autoscan
+  # Configure Autoscan
+  curl -o /autoscan/autoscan "https://github.com/Cloudbox/autoscan/releases/download/${AUTOSCAN_VERSION:-v.1.2.0}/autoscan_${AUTOSCAN_VERSION:-v.1.2.0}_linux_amd64"
+  # Configure A-Train
+  rm -rf /autoscan/a-train
+  chamber read -q $SERVICE_ACCOUNT_ROOT $TOKEN_AUTH_KEY > /tmp/token_auth.json
+  # Obtain raw token from secrets
+  TOKEN_AUTH=$(cat /tmp/token_auth.json | jq --raw-output '.token_auth')
+  # Obtain real IP address for IP filtering
+  FILTERED_IP=$(curl 'https://showmethisip.com/api' | jq --raw-output '.ip')
+  # Construct Token Auth
+  TOKEN_DOWNLOAD_URL=$(curl "https://${TOKEN_AUTH_HOST}/?key=${TOKEN_AUTH}&filepath=${TOKEN_AUTH_AUTOSCAN_FILEPATH}&cdnurl=${CDN_BASE_URL}&filteredip=${FILTERED_IP}" | jq --raw-output .url)
+  # Download tokenized file
+  curl ${ADDL_CURL_OPTS} -o /autoscan/a-train ${TOKEN_DOWNLOAD_URL}
+  chmod +x /autoscan/a-train
+  rm /tmp/token_auth.json
+else
+  echo "Not configuring Legacy PAS, skipping..."
+fi
+
+touch ./plexAutoscanConfigure

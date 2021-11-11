@@ -1,7 +1,15 @@
 #!/usr/bin/with-contenv bash
 
-echo "[PAS] plex_autoscan waiting for Plex service to be ready"
-s6-svwait ../plex && sleep 1
+if [ ${ENABLE_LEGACY_PAS} == "true" ]; then
+    echo "[PAS] plex_autoscan waiting for Plex service to be ready"
+    s6-svwait ../plex && sleep 1
 
-echo "[PAS] plex_autoscan starting..."
-exec s6-setuidgid abc python3 /plex_autoscan/scan.py server --loglevel=${PAS_LOG_LEVEL:-INFO}
+    echo "[PAS] plex_autoscan starting..."
+    exec s6-setuidgid abc python3 /plex_autoscan/scan.py server --loglevel=${PAS_LOG_LEVEL:-INFO}
+else
+    while :
+    do
+        echo "Running script to keep service alive; Legacy PAS is not running"
+        sleep 86400
+    done
+fi
