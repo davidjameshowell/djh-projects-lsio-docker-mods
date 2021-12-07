@@ -37,7 +37,7 @@ if [ ${ENABLE_AUTOSCAN} == "true" ]; then
   chown -R abc:abc /autoscan
   rm /tmp/token_auth.json
 else
-  echo "Not configuring Legacy PAS, skipping..."
+  echo "Not configuring NextGen PAS, skipping..."
 fi
 
 touch ./plexAutoscanConfigure
