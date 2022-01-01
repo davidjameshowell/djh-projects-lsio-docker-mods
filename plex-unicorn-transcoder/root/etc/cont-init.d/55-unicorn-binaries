@@ -5,9 +5,11 @@ if [ -e /.firstUnicornTransRunComplete ]; then
   exit 0
 fi
 
-NODE_VERSION=14.18.2
-NVM_DIR=/tmp/.nvm
-PATH="/tmp/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+export NODE_VERSION=14.18.2
+export NVM_DIR=/tmp/.nvm
+export PATH="/tmp/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+
+mkdir -p $NVM_DIR
 
 echo [UNICORN TRANSCODER] Install Node10 and setup UnicornTranscoder
 apt update && apt install git curl gpgv gnupg python3 -y && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash - \
