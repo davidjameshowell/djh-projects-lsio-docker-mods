@@ -1,7 +1,9 @@
 #!/usr/bin/with-contenv bash
 
 umask 022
+NODE_VERSION=14.18.2
 export PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+chmod +x $(which npm) && chown abc:root $(which npm)
 
 exec \
-        s6-setuidgid abc npm start --prefix /opt/UnicornTranscoder
+        s6-setuidgid abc /root/.nvm/versions/node/v${NODE_VERSION}/bin/npm start --prefix /opt/UnicornTranscoder
