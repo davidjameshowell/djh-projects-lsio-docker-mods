@@ -1,6 +1,7 @@
 #!/usr/bin/with-contenv bash
 
 umask 022
+export PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 
 exec \
         s6-setuidgid abc npm start --prefix /opt/UnicornTranscoder
