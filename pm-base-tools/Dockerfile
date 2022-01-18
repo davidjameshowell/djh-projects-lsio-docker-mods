@@ -1,11 +1,11 @@
 FROM alpine:3.13.6 AS buildstage
 
-ARG RCLONE_VERSION=${RCLONE_VERSION:-v1.56.2}
+ARG RCLONE_VERSION=${RCLONE_VERSION:-v1.57.0}
 #ARG RCLONE_BETA_URL=https://beta.rclone.org/v${RCLONE_VERSION}/rclone-v${RCLONE_VERSION}-linux-amd64.zip
 ARG RCLONE_URL=https://downloads.rclone.org/${RCLONE_VERSION}/rclone-${RCLONE_VERSION}-linux-amd64.zip
 ARG RCLONE_FILENAME=rclone-${RCLONE_VERSION}-linux-amd64
 ARG RCLONE_EXT=.zip
-ARG CHAMBER_VERSION=${CHAMBER_VERSION:-2.10.6}
+ARG CHAMBER_VERSION=${CHAMBER_VERSION:-2.10.7}
 ARG CLOUDFLARED_VERSION=${CLOUDFLARED_VERSION:-2021.10.3}
 
 RUN apk --update add wget unzip && \
@@ -22,6 +22,6 @@ RUN apk --update add wget unzip && \
 
 COPY pm-base-tools/root/ /root-layer/
 
-FROM lsiobase/ubuntu:amd64-focal
+FROM scratch
 
 COPY --from=buildstage /root-layer/ /

@@ -1,0 +1,68 @@
+name: "Build LSIO Docker Mods"
+
+on: push
+
+jobs:
+  build-nzbget-post-processing-scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: nzbget-post-processing-scripts
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+  build-plex-additional-rclone-mount:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: plex-additional-rclone-mount
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+  build-plex-redirect-stdout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: plex-redirect-stdout
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+  build-plex-unicorn-transcoder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: plex-unicorn-transcoder
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+  build-pm-base-tools:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: pm-base-tools
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+  build-pm-unicorn-ffmpeg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: pm-unicorn-ffmpeg
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+  build-rclone-rotate-service-account:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: rclone-rotate-service-account
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
