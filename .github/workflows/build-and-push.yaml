@@ -15,7 +15,8 @@ jobs:
           dockerfile: nzbget-post-processing-scripts/Dockerfile
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GH_PAT_TOKEN }}
+
   build-plex-additional-rclone-mount:
     runs-on: ubuntu-latest
     steps:
@@ -28,7 +29,8 @@ jobs:
           dockerfile: plex-additional-rclone-mount/Dockerfile
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GH_PAT_TOKEN }}
+
   build-plex-redirect-stdout:
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +43,8 @@ jobs:
           dockerfile: plex-redirect-stdout/Dockerfile
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GH_PAT_TOKEN }}
+
   build-plex-unicorn-transcoder:
     runs-on: ubuntu-latest
     steps:
@@ -54,7 +57,8 @@ jobs:
           dockerfile: plex-unicorn-transcoder/Dockerfile
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GH_PAT_TOKEN }}
+
   build-pm-base-tools:
     runs-on: ubuntu-latest
     steps:
@@ -67,7 +71,8 @@ jobs:
           dockerfile: pm-base-tools/Dockerfile
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GH_PAT_TOKEN }}
+
   build-pm-unicorn-ffmpeg:
     runs-on: ubuntu-latest
     steps:
@@ -80,7 +85,8 @@ jobs:
           dockerfile: pm-unicorn-ffmpeg/Dockerfile
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GH_PAT_TOKEN }}
+
   build-rclone-rotate-service-account:
     runs-on: ubuntu-latest
     steps:
@@ -93,4 +99,4 @@ jobs:
           dockerfile: rclone-rotate-service-account/Dockerfile
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GH_PAT_TOKEN }}
