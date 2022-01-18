@@ -13,6 +13,7 @@ jobs:
         with:
           image: nzbget-post-processing-scripts
           dockerfile: nzbget-post-processing-scripts/Dockerfile
+          addLatest: true
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GH_PAT_TOKEN }}
@@ -27,6 +28,7 @@ jobs:
         with:
           image: plex-additional-rclone-mount
           dockerfile: plex-additional-rclone-mount/Dockerfile
+          addLatest: true
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GH_PAT_TOKEN }}
@@ -41,6 +43,7 @@ jobs:
         with:
           image: plex-redirect-stdout
           dockerfile: plex-redirect-stdout/Dockerfile
+          addLatest: true
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GH_PAT_TOKEN }}
@@ -55,6 +58,7 @@ jobs:
         with:
           image: plex-unicorn-transcoder
           dockerfile: plex-unicorn-transcoder/Dockerfile
+          addLatest: true
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GH_PAT_TOKEN }}
@@ -69,6 +73,7 @@ jobs:
         with:
           image: pm-base-tools
           dockerfile: pm-base-tools/Dockerfile
+          addLatest: true
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GH_PAT_TOKEN }}
@@ -83,6 +88,7 @@ jobs:
         with:
           image: pm-unicorn-ffmpeg
           dockerfile: pm-unicorn-ffmpeg/Dockerfile
+          addLatest: true
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GH_PAT_TOKEN }}
@@ -97,6 +103,7 @@ jobs:
         with:
           image: rclone-rotate-service-account
           dockerfile: rclone-rotate-service-account/Dockerfile
+          addLatest: true
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GH_PAT_TOKEN }}
