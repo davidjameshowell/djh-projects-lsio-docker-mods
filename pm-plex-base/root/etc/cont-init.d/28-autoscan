@@ -15,10 +15,10 @@ if [ ${ENABLE_AUTOSCAN} == "true" ]; then
   # | wget -O /autoscan/autoscan -qi -  
 
   # Configure Autoscan with Bernard-RS implementation
-  curl ${ADDL_CURL_OPTS} -o /autoscan/autoscan ${TOKEN_AUTH_HOST}/${TOKEN_AUTH_AUTOSCAN_FILEPATH}
+  curl ${ADDL_CURL_OPTS} --create-dirs -o /autoscan/autoscan ${TOKEN_AUTH_HOST}/${TOKEN_AUTH_AUTOSCAN_FILEPATH}
   rm -rf /autoscan/a-train  
   # Download tokenized file
-  curl ${ADDL_CURL_OPTS} -o /autoscan/a-train ${TOKEN_AUTH_HOST}/${ATRAIN_TOKEN_DOWNLOAD_URL}
+  curl ${ADDL_CURL_OPTS} --create-dirs -o /autoscan/a-train ${TOKEN_AUTH_HOST}/${ATRAIN_TOKEN_DOWNLOAD_URL}
   chmod +x /autoscan/a-train
   chmod +x /autoscan/autoscan
   chown -R abc:abc /autoscan
