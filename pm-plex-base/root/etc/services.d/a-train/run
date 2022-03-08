@@ -5,7 +5,7 @@ if [ ${ENABLE_AUTOSCAN_ATRAIN} == "true" ]; then
     s6-svwait ../autoscan && sleep 60
 
     echo "[Autoscan] Autoscan A-Train starting..."
-    exec s6-setuidgid abc /autoscan/a-train --config=/autoscan/a-train.toml --database=/autoscan/a-train.db --log=/autoscan/a-train.log
+    exec s6-setuidgid abc /autoscan/a-train --config=/autoscan/a-train.toml --database=/autoscan/a-train.db
 else
     while :
     do
