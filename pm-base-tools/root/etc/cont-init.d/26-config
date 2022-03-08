@@ -53,11 +53,11 @@ chown -R abc:abc \
 	/${MEDIA_RCLONE_MOUNT} \
 	/dev/fuse
 
-echo "[BASE] Begin chown for non-plex services, ignore if failing here"
+# echo "[BASE] Begin chown for non-plex services, ignore if failing here"
 
-chown -R abc:abc \
-    /opt \
-    /config
+# chown -R abc:abc \
+#     /opt \
+#     /config
 
 # Touch first run file to ensure that we are not redoing already created tasks.
 touch /.firstPMBaseRunComplete
