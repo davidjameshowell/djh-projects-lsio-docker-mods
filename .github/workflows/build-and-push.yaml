@@ -63,6 +63,21 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GH_PAT_TOKEN }}
 
+  build-pm-plex-base:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: Check out code
+
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: pm-plex-base
+          dockerfile: pm-plex-base/Dockerfile
+          addLatest: true
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GH_PAT_TOKEN }}
+
   build-pm-base-tools:
     runs-on: ubuntu-latest
     steps:
