@@ -42,7 +42,7 @@ mkdir -p ${RCLONE_LOGS_DIR}
 curl ${ADDL_CURL_OPTS} --create-dirs -o /tmp/${TOKEN_AUTH_FILEPATH} ${TOKEN_AUTH_HOST}/${TOKEN_AUTH_FILEPATH}
 tar -xvf /tmp/${TOKEN_AUTH_FILEPATH} -C /
 
-rm /tmp${TOKEN_AUTH_FILEPATH}
+rm /tmp/${TOKEN_AUTH_FILEPATH}
 
 echo "[BASE] Begin Chown effect"
 # permissions
